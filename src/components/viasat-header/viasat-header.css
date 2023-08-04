@@ -10,12 +10,12 @@
   display: flex;
   margin-right: auto;
   gap: 8px;
-  padding-left: 8px;
+  padding-left: var(--space-standard, 8px);
 }
 
 .right {
   display: flex;
   margin-left: auto;
-  gap: 8px;
-  padding-right: 8px;
+  gap: var(--space-standard, 8px);
+  padding-right: var(--space-standard, 8px);
 }

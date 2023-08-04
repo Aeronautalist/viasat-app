@@ -137,7 +137,7 @@ describe("<App />", () => {
           const twoButton = await screen.findByText("2");
 
           // ACT
-          fireEvent.click(twoButton);
+          await fireEvent.click(twoButton);
 
           // ASSERT
           card = await screen.findByText("Sucessful launch-6");

@@ -11,18 +11,8 @@ const PaginationButtons = ({ pages = 0, pageClicked = () => {} }) => {
 
   useEffect(() => {
     const buttonsArray = [];
-    if (currentPage - 2 > 0) {
-      _addElipsButton(buttonsArray, "first");
-    }
-
-    const initialPages =
-      pages < TOTAL_PAGE_T0_SHOW ? pages : TOTAL_PAGE_T0_SHOW;
-    buttonsArray.push([..._createButtons(0, initialPages)]);
-
-    if (currentPage + TOTAL_PAGE_T0_SHOW < pages) {
-      _addElipsButton(buttonsArray, "last");
-    }
-
+    setCurrentPage(0);
+    _updateButtons(buttonsArray);
     setButtons(() => buttonsArray);
   }, [pages]);
 
@@ -30,7 +20,6 @@ const PaginationButtons = ({ pages = 0, pageClicked = () => {} }) => {
     const buttonsArray = [];
     _updateButtons(buttonsArray);
     setButtons(() => buttonsArray);
-    pageClicked(currentPage);
   }, [currentPage]);
 
   useEffect(() => {
@@ -56,14 +45,16 @@ const PaginationButtons = ({ pages = 0, pageClicked = () => {} }) => {
   const _updateButtons = (buttonsArray) => {
     //First page
     if (currentPage === 0) {
-      buttonsArray.push([..._createButtons(currentPage, TOTAL_PAGE_T0_SHOW)]);
+      const pagesToShow =
+        pages < TOTAL_PAGE_T0_SHOW ? pages : TOTAL_PAGE_T0_SHOW;
+      buttonsArray.push([..._createButtons(currentPage, pagesToShow)]);
 
       if (pages > TOTAL_PAGE_T0_SHOW) {
         _addElipsButton(buttonsArray, "last");
       }
     }
     //Last page
-    else if (currentPage === pages - 1) {
+    else if (currentPage > 0 && currentPage === pages - 1) {
       buttonsArray.push([..._createButtons(currentPage - 2, pages)]);
 
       if (pages > TOTAL_PAGE_T0_SHOW) {
@@ -134,17 +125,22 @@ const PaginationButtons = ({ pages = 0, pageClicked = () => {} }) => {
    */
   const handleClick = (event) => {
     const clickedVal = event.target.value;
+    let newPage = 0;
     if (clickedVal === "next") {
       if (currentPage < pages - 1) {
-        setCurrentPage(currentPage + 1);
+        newPage = currentPage + 1;
+        setCurrentPage(newPage);
       }
     } else if (clickedVal === "previous") {
       if (currentPage > 0) {
+        newPage = currentPage - 1;
         setCurrentPage(currentPage - 1);
       }
     } else {
+      newPage = clickedVal;
       setCurrentPage(clickedVal);
     }
+    pageClicked(newPage);
   };
 
   return (
