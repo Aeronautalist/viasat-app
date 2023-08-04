@@ -12,7 +12,7 @@
 This is a simple Node base App.  
 The Node version I am using is the latest LTS version v18.17.0. You probably won't need the latest Node version to run it but Node 18 is probably safest.
 
-[https://nodejs.org/en](Install Node)
+- [https://nodejs.org/en](install Node)
 
 ### Install Project Dependencies
 
