@@ -1,0 +1,11 @@
+.viasat-footer {
+  height: 100%;
+  width: 100%;
+  display: flex;
+  background-color: var(--main-color, "#f6f4eb");
+  align-items: center;
+}
+
+.middle {
+  margin: auto;
+}
